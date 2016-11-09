@@ -1,2 +1,3 @@
 MSTAR Tensorflow
-![MSTAR image](mstar_image.png)
+
+![MSTAR image](mstar_image.png "Sample MSTAR image")
