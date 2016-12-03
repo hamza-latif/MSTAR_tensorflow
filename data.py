@@ -125,7 +125,7 @@ class DataHandler:
 		:return test_labels: test labels
 		"""
 
-		return self.test_data, self.test_labels
+		return self.test_data.transpose(), self.test_labels
 
 	def get_next_mini_test_batch(self):
 		""" Generates and returns the next mini batch of test data and labels
@@ -149,13 +149,13 @@ class DataHandler:
 		:return train_x: the training data
 		:return train_y: the training labels
 		"""
-		train_x = np.zeros([0,3072])
+		train_x = np.zeros([0,128*128*2])
 		train_y = []
 
 		for i in range(self.number_batches):
 			with open(self.batch_location + '/data_batch_' + str(i+1)) as df:
 				data = pickle.load(df)
-				train_x = np.concatenate((train_x,data['data']))
+				train_x = np.concatenate((train_x,data['data'].transpose()))
 				train_y = train_y + data['labels']
 
 		return train_x, train_y

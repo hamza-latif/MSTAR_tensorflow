@@ -2,7 +2,7 @@ import tensorflow as tf
 import tflearn
 import numpy as np
 from data import DataHandler
-from network_defs import *
+#from network_defs import *
 import time
 import os
 
@@ -17,7 +17,7 @@ def example_net(x):
 	network = tflearn.max_pool_2d(network, 2)
 	network = tflearn.fully_connected(network, 512, activation='relu')
 	network = tflearn.dropout(network, 0.5)
-	network = tflearn.fully_connected(network, 10, activation='softmax')
+	network = tflearn.fully_connected(network, 3, activation='softmax')
 
 	return network
 
@@ -31,7 +31,17 @@ def trythisnet(x):
 	network = tflearn.max_pool_2d(network,3,2)
 	network = tflearn.fully_connected(network,384,activation='relu',weight_decay=0.004)
 	network = tflearn.fully_connected(network,192,activation='relu',weight_decay=0.004)
-	network = tflearn.fully_connected(network,10,activation='softmax',weight_decay=0.0)
+	network = tflearn.fully_connected(network,3,activation='softmax',weight_decay=0.0)
+
+	return network
+
+def mstarnet(x):
+	network = tflearn.conv_2d(x,18,9,activation='relu')
+	network = tflearn.max_pool_2d(network,6)
+	network = tflearn.conv_2d(network,36,5,activation='relu')
+	network = tflearn.max_pool_2d(network,4)
+	network = tflearn.conv_2d(network,120,4,activation='relu')
+	network = tflearn.fully_connected(network,3,activation='softmax')
 
 	return network
 
@@ -46,11 +56,13 @@ def resnet1(x, n = 5):
 	net = tflearn.activation(net, 'relu')
 	net = tflearn.global_avg_pool(net)
 	# Regression
-	net = tflearn.fully_connected(net, 10, activation='softmax')
+	net = tflearn.fully_connected(net, 3, activation='softmax')
+
+	return net
 
 def train_nn_tflearn(data_handler,num_epochs=50):
 
-	gpu_options = tf.GPUOptions(per_process_gpu_memory_fraction=0.5)
+	#gpu_options = tf.GPUOptions(per_process_gpu_memory_fraction=0.5)
 
 	batch_size = data_handler.mini_batch_size
 
@@ -61,8 +73,9 @@ def train_nn_tflearn(data_handler,num_epochs=50):
 	img_aug = tflearn.ImageAugmentation()
 	img_aug.add_random_flip_leftright()
 	img_aug.add_random_rotation(max_angle=25)
+	#img_aug.add_random_crop([32,32], padding=4)
 
-	x = tflearn.input_data(shape=[None, 32, 32, 3], dtype='float', data_preprocessing=img_prep,
+	x = tflearn.input_data(shape=[None, 128, 128, 1], dtype='float', data_preprocessing=img_prep,
 						   data_augmentation=img_aug)
 	# x = tf.placeholder('float', [None, 32, 32, 3])
 	#y = tf.placeholder('float', [None, 10])
@@ -83,32 +96,34 @@ def train_nn_tflearn(data_handler,num_epochs=50):
 
 	X, Y = tflearn.data_utils.shuffle(X, Y)
 
-	X = np.dstack((X[:, :1024], X[:, 1024:2048], X[:, 2048:]))
+	#X = np.dstack((X[:, :128*128], X[:, 128*128:]))
+	X = X[:,:128*128]
 
-	X = X/255.0
+	#X = X/255.0
 
-	X = X.reshape([-1,32,32,3])
-
-	Y = tflearn.data_utils.to_categorical(Y,10)
+	#X = X.reshape([-1,128,128,2])
+	X = X.reshape([-1,128,128,1])
+	
+	Y = tflearn.data_utils.to_categorical(Y,3)
 
 	X_test, Y_test = data_handler.get_test_data()
 
-	X_test = np.dstack((X_test[:, :1024], X_test[:, 1024:2048], X_test[:, 2048:]))
+	#X_test = np.dstack((X_test[:, :128*128], X_test[:, 128*128:]))
+	X_test = X_test[:,:128*128]
+	#X_test = X_test/255.0
 
-	X_test = X_test/255.0
-
-	X_test = X_test.reshape([-1,32,32,3])
-
+	#X_test = X_test.reshape([-1,128,128,2])
+	X_test = X_test.reshape([-1,128,128,1])
 	#network = tflearn.regression(net3(x),optimizer='adam',loss='categorical_crossentropy',learning_rate=0.001)
-	mom = tflearn.Momentum(0.1, lr_decay=0.1, decay_step=32000, staircase=True)
-	network = tflearn.regression(resnet1(x),optimizer=mom,loss='categorical_crossentropy')
-
+	#mom = tflearn.Momentum(0.1, lr_decay=0.1, decay_step=32000, staircase=True)
+	#network = tflearn.regression(resnet1(x),optimizer='sgd',loss='categorical_crossentropy')
+	network = tflearn.regression(resnet1(x),optimizer='adam',loss='categorical_crossentropy')
 	print np.shape(X)
 	print np.shape(Y)
 	print network
 
 	model = tflearn.DNN(network,tensorboard_verbose=0)
-	model.fit(X, Y, n_epoch=50, shuffle=True, validation_set=(X_test, Y_test),
+	model.fit(X, Y, n_epoch=num_epochs, shuffle=True, validation_set=(X_test, Y_test),
 			  show_metric=True, batch_size=data_handler.mini_batch_size, run_id='cifar10_cnn')
 
 if __name__ == '__main__':
