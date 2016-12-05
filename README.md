@@ -27,7 +27,7 @@ Residual networks are a recent evolution of convolutional networks that have all
 
 In a residual network, we have what are called residual blocks, a pair of layers where the input of the first layer is added to the output of the second layer. The mapping is similar to learning $F(x) = H(x) - x$, where $H(x)$ is the original function we wish to learn. The authors of the Deep Residual Learning paper hypothesize that it is easier for a network to learn this residual than to optimize the original function.
 
-![Residual Block](residual_building_block.png)
+![Residual Block](residual_building_block.png Residual Block)
 
 
 
