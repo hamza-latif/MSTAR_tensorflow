@@ -28,6 +28,7 @@ The MSTAR dataset is a collection of SAR images gathered from 1995-1997. The two
 The images are target chips taken from scenes of SAR images, each chip is 128 by 128 pixels and contains magnitude data and phase data in the form of floating point numbers. For our purposes we only consider the magnitude data.
 
 ![MSTAR Targets](mstar_targets.png)
+
 ## Convolutional Networks
 
 There are lots of tutorials on convolutional networks. Google them.
