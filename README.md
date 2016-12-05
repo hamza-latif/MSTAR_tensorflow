@@ -27,7 +27,7 @@ The MSTAR dataset is a collection of SAR images gathered from 1995-1997. The two
 
 The images are target chips taken from scenes of SAR images, each chip is 128 by 128 pixels and contains magnitude data and phase data in the form of floating point numbers. For our purposes we only consider the magnitude data.
 
-![MSTAR Targets](mstar_targets.png "MSTAR database. (a) and (b) Visible light images for BMP2, BTR70, T72, BTR60, 2S1, BRDM2, D7, T62, ZIL131, and ZSU23/4. (c) and (d) Corresponding SAR images for 10 targets measured at azimuth angle of 45 deg.")
+![MSTAR Targets](mstar_targets.png "MSTAR database. \(a\) and \(b\) Visible light images for BMP2, BTR70, T72, BTR60, 2S1, BRDM2, D7, T62, ZIL131, and ZSU23/4. c and d Corresponding SAR images for 10 targets measured at azimuth angle of 45 deg.")
 ## Convolutional Networks
 
 There are lots of tutorials on convolutional networks. Google them.
