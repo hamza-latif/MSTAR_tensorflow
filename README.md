@@ -13,4 +13,10 @@ Our base will be the paper *Deep convolutional neural networks for ATR from SAR 
 
 We will explore a few number of different convolutional network configurations and also residual networks.
 
-[//]: # (This may be the most platform independent comment)
+[//]: # (Also look at *APPLICATION OF DEEP LEARNING ALGORITHMS TO MSTAR DATA* [Wang, Chen, Xu, Jin 2015] where they claim 99.1% accuracy with All-ConvNets)
+
+# Background
+
+There are lots of tutorials on convolutional networks. Google them.
+
+## Residual Networks
