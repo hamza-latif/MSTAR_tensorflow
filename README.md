@@ -21,7 +21,7 @@ We will explore a few number of different convolutional network configurations a
 
 Synthetic Aperture Radar (SAR) is a form of radar that uses the motion of an antenna over a distance to create a large "synthetic" antenna aperture, so that it can provide much finer resolution images than standard radar.
 
-![SAR](Synthetic_Aperture_Radar.jpg "SAR Basic Principle")
+<img src="Synthetic_Aperture_Radar.jpg" width="256">
 
 ## Convolutional Networks
 
