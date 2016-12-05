@@ -23,6 +23,11 @@ Synthetic Aperture Radar (SAR) is a form of radar that uses the motion of an ant
 
 <img src="Synthetic_Aperture_Radar.jpg" width="256">
 
+The MSTAR dataset is a collection of SAR images gathered from 1995-1997. The two subsets we are interested in are the MSTAR Public Targets, that contains three classes of vehicles, and the MSTAR/IU Mixed Targets, that contains 10 classes of vehicles.
+
+The images are target chips taken from scenes of SAR images, each chip is 128 by 128 pixels and contains magnitude data and phase data in the form of floating point numbers. For our purposes we only consider the magnitude data.
+
+![MSTAR Targets](mstar_targets.png "MSTAR database. (a) and (b) Visible light images for BMP2, BTR70, T72, BTR60, 2S1, BRDM2, D7, T62, ZIL131, and ZSU23/4. (c) and (d) Corresponding SAR images for 10 targets measured at azimuth angle of 45 deg.")
 ## Convolutional Networks
 
 There are lots of tutorials on convolutional networks. Google them.
