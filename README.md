@@ -9,4 +9,4 @@ Synthetic Aperture Radar (SAR) object recognition is an important problem for au
 We want to train a deep neural network to identify targets in the three class MSTAR dataset obtained from https://www.sdms.afrl.af.mil/index.php?collection=mstar&page=targets and possibly the ten class dataset from 
 https://www.sdms.afrl.af.mil/index.php?collection=mstar&page=mixed.
 
-Our base will be the paper *Deep convolutional neural networks for ATR from SAR imagery* by Morgan, where they claim to achieve an overall 92.3% classification accuracy for the ten class problem.
+Our base will be the paper *Deep convolutional neural networks for ATR from SAR imagery*(Morgan), where they claim to achieve an overall 92.3% classification accuracy for the ten class problem.
