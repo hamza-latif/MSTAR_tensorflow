@@ -17,6 +17,10 @@ We will explore a few number of different convolutional network configurations a
 
 # Background
 
+## Convolutional Networks
+
 There are lots of tutorials on convolutional networks. Google them.
 
 ## Residual Networks
+
+Residual networks are a recent evolution of convolutional networks that have allowed much deeper networks than conventional convolutional networks. For example, in the paper *Deep Residual Learning for Image Recognition* [He, Zhang, Ren, Sun 2015] they used an ensemble of 6 residual networks, each having up to 152 layers, to achieve a 3.57% top-5 error rate in ILSVRC 2015.
