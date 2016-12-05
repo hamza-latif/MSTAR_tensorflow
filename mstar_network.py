@@ -63,6 +63,7 @@ def resnet1(x, n = 5):
 def train_nn_tflearn(data_handler,num_epochs=50):
 
 	#gpu_options = tf.GPUOptions(per_process_gpu_memory_fraction=0.5)
+	#tflearn.init_graph(gpu_memory_fraction=0.5)
 
 	batch_size = data_handler.mini_batch_size
 
@@ -122,9 +123,9 @@ def train_nn_tflearn(data_handler,num_epochs=50):
 	print np.shape(Y)
 	print network
 
-	model = tflearn.DNN(network,tensorboard_verbose=0)
+	model = tflearn.DNN(network,tensorboard_verbose=3,checkpoint_path='/tmp/tflearn/checkpoints/',best_checkpoint_path='best/',best_val_accuracy=0.90)
 	model.fit(X, Y, n_epoch=num_epochs, shuffle=True, validation_set=(X_test, Y_test),
-			  show_metric=True, batch_size=data_handler.mini_batch_size, run_id='cifar10_cnn')
+			  show_metric=True, batch_size=data_handler.mini_batch_size, run_id='mstar_cnn')
 
 if __name__ == '__main__':
 	import sys
