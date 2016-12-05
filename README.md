@@ -17,6 +17,12 @@ We will explore a few number of different convolutional network configurations a
 
 # Background
 
+## SAR and MSTAR database
+
+Synthetic Aperture Radar (SAR) is a form of radar that uses the motion of an antenna over a distance to create a large "synthetic" antenna aperture, so that it can provide much finer resolution images than standard radar.
+
+![SAR](Synthetic_Aperture_Radar.jpg "SAR Basic Principle")
+
 ## Convolutional Networks
 
 There are lots of tutorials on convolutional networks. Google them.
@@ -27,7 +33,6 @@ Residual networks are a recent evolution of convolutional networks that have all
 
 In a residual network, we have what are called residual blocks, a pair of layers where the input of the first layer is added to the output of the second layer. The mapping is similar to learning $F(x) = H(x) - x$, where $H(x)$ is the original function we wish to learn. The authors of the Deep Residual Learning paper hypothesize that it is easier for a network to learn this residual than to optimize the original function.
 
-![Residual Block](residual_building_block.png Residual Block)
-
+![Residual Block](residual_building_block.png "Residual Block")
 
 
