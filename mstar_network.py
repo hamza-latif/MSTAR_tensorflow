@@ -45,7 +45,7 @@ def mstarnet(x):
 
 	return network
 
-def resnet1(x, n = 5):
+def resnet1(x, classes, n = 5):
 	net = tflearn.conv_2d(x, 16, 3, regularizer='L2', weight_decay=0.0001)
 	net = tflearn.residual_block(net, n, 16)
 	net = tflearn.residual_block(net, 1, 32, downsample=True)
@@ -56,7 +56,7 @@ def resnet1(x, n = 5):
 	net = tflearn.activation(net, 'relu')
 	net = tflearn.global_avg_pool(net)
 	# Regression
-	net = tflearn.fully_connected(net, 3, activation='softmax')
+	net = tflearn.fully_connected(net, classes, activation='softmax')
 
 	return net
 
@@ -66,6 +66,7 @@ def train_nn_tflearn(data_handler,num_epochs=50):
 	#tflearn.init_graph(gpu_memory_fraction=0.5)
 
 	batch_size = data_handler.mini_batch_size
+	classes = data_handler.num_labels
 
 	img_prep = tflearn.ImagePreprocessing()
 	img_prep.add_featurewise_zero_center()
@@ -105,7 +106,7 @@ def train_nn_tflearn(data_handler,num_epochs=50):
 	#X = X.reshape([-1,128,128,2])
 	X = X.reshape([-1,128,128,1])
 	
-	Y = tflearn.data_utils.to_categorical(Y,3)
+	Y = tflearn.data_utils.to_categorical(Y,classes)
 
 	X_test, Y_test = data_handler.get_test_data()
 
@@ -118,7 +119,7 @@ def train_nn_tflearn(data_handler,num_epochs=50):
 	#network = tflearn.regression(net3(x),optimizer='adam',loss='categorical_crossentropy',learning_rate=0.001)
 	#mom = tflearn.Momentum(0.1, lr_decay=0.1, decay_step=32000, staircase=True)
 	#network = tflearn.regression(resnet1(x),optimizer='sgd',loss='categorical_crossentropy')
-	network = tflearn.regression(resnet1(x),optimizer='adam',loss='categorical_crossentropy')
+	network = tflearn.regression(resnet1(x,classes),optimizer='adam',loss='categorical_crossentropy')
 	print np.shape(X)
 	print np.shape(Y)
 	print network
