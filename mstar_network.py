@@ -124,6 +124,9 @@ def train_nn_tflearn(data_handler,num_epochs=50):
 	print np.shape(Y)
 	print network
 
+	if not os.path.exists('/tmp/tflearn/checkpoints'):
+		os.makedirs('/tmp/tflearn/checkpoints')
+
 	model = tflearn.DNN(network,tensorboard_verbose=3,checkpoint_path='/tmp/tflearn/checkpoints/',best_checkpoint_path='best/',best_val_accuracy=0.90)
 	model.fit(X, Y, n_epoch=num_epochs, shuffle=True, validation_set=(X_test, Y_test),
 			  show_metric=True, batch_size=data_handler.mini_batch_size, run_id='mstar_cnn')
