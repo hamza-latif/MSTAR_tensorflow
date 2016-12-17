@@ -42,4 +42,19 @@ In a residual network, we have what are called residual blocks, a pair of layers
 
 ![Residual Block](residual_building_block.png "Residual Block")
 
+# Network
+
+Our residual network is borrowed from *Deep Residual Learning for Image Recognition* [He, Zhang, Ren, Sun 2015]. It is a 32 layer residual network with the following configuration:
+
+|Layer Type | Output Size | Filters | Kernel Size|
+|---|---|---|---|
+|Input Layer | 128 $\times$ 128 | - | -|
+|Convolutional Layer | 128 $\times$ 128 | 16 | 3 $\times$ 3|
+|Residual Block Size 5 | 128 $\times$ 128 | 16 | 3 $\times$ 3|
+|Residual Block Size 1 | 64 $\times$ 64 | 32 | 3 $\times$ 3|
+|Residual Block Size 4 | 64 $\times$ 64 | 32 | 3 $\times$ 3|
+|Residual Block Size 1 | 32 $\times$ 32 | 64 | 3 $\times$ 3|
+|Residual Block Size 4 | 32 $\times$ 32 | 64 | 3 $\times$ 3|
+|Global Average Pooling | 64 | - | -|
+|Fully Connected Layer | Number of Classes|-|-|
 
